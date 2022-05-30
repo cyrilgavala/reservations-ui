@@ -1,0 +1,9 @@
+#header {
+    background-color: var(--neutral-color);
+    background-image: url("./header-image.jpg");
+    background-blend-mode: overlay;
+    background-position: center;
+    background-size: cover;
+    width: 100%;
+    height: 15rem;
+}

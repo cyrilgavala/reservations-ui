@@ -1,0 +1,16 @@
+#footer {
+    height: 2rem;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: 'Ubuntu Mono', monospace;
+    background-color: var(--background-color);
+    color: var(--accent-color);
+}
+
+#footer > p {
+    padding: 0 1rem;
+    line-height: 1.2rem;
+    font-size: 1rem;
+}
