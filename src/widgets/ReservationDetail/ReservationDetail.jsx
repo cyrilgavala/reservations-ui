@@ -1,7 +1,7 @@
 import {useState} from "react";
 import UpdateReservationForm from "../UpdateReservationForm";
 
-export const ReservationDetail = ({reservation, deleteCallback}) => {
+export const ReservationDetail = ({reservation, deleteCallback, enabled}) => {
 
     const [data, setData] = useState(reservation)
 
@@ -18,7 +18,7 @@ export const ReservationDetail = ({reservation, deleteCallback}) => {
         <p>Patient name: {data.reservationFor}</p>
         <p>Reservation from: {data.reservationFrom}</p>
         <p>Reservation to: {data.reservationTo}</p>
-        <i className="close-btn fa-regular fa-circle-xmark" title="Delete reservation" onClick={handleDelete}/>
-        <UpdateReservationForm reservation={data} updateCallback={updateCallback} />
+        {enabled && <span className="delete-btn" onClick={handleDelete}>Delete reservation&#160;<i className="fa-regular fa-circle-xmark"/></span>}
+        <UpdateReservationForm reservation={data} updateCallback={updateCallback} enabled={enabled}/>
     </div>
 }

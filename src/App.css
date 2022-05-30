@@ -1,12 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
-@import "Header/Header.module.css";
-@import "Footer/Footer.module.css";
-@import "CreateReservationForm/CreateReservationForm.module.css";
-@import "UpdateReservationForm/UpdateReservationForm.module.css";
-@import "ReservationDetail/ReservationDetail.module.css";
-@import "ReservationsWrapper/ReservationsWrapper.module.css";
-@import "CalendarWrapper/CalendarWrapper.module.css";
+@import "widgets/Header/Header.module.css";
+@import "widgets/Footer/Footer.module.css";
+@import "widgets/CreateReservationForm/CreateReservationForm.module.css";
+@import "widgets/UpdateReservationForm/UpdateReservationForm.module.css";
+@import "widgets/ReservationDetail/ReservationDetail.module.css";
+@import "widgets/ReservationsWrapper/ReservationsWrapper.module.css";
+@import "widgets/CalendarWrapper/CalendarWrapper.module.css";
+@import "widgets/MenuWrapper/MenuWrapper.module.css";
+@import "widgets/Spinner/Spinner.module.css";
 
 * {
     margin: 0;
@@ -20,14 +22,19 @@ body {
     --neutral-color: #282c34;
     --accent-color: #4daec8;
     --error-color: #fb8261;
+    height: 100vh;
+    width: 100vw;
+    background-color: var(--background-color);
+    color: var(--accent-color);
 }
 
 .App {
     background-color: var(--neutral-color);
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: stretch;
 }
 
 .form-wrapper {
@@ -96,6 +103,10 @@ body {
     box-shadow: 0 0 .25rem var(--accent-color), inset 0 0 .25rem var(--accent-color);
 }
 
+.submit-btn:disabled {
+    pointer-events: none;
+}
+
 .error-message {
     width: 100%;
     max-width: 300px;
@@ -113,7 +124,7 @@ body {
 }
 
 .modal-content {
-    padding: 2rem;
+    padding: 3rem 2rem 2rem;
     display: flex;
     gap: 1rem;
     justify-self: center;
@@ -132,10 +143,24 @@ body {
 
 .close-btn {
     position: absolute;
-    top: .25rem;
-    right: .25rem;
+    top: 1rem;
+    right: 3.75rem;
     color: var(--error-color);
     height: 1rem;
     width: 1rem;
     cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.my-reservations-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    overflow: scroll;
+    gap: 2rem;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+    padding: 7.5rem 0;
 }

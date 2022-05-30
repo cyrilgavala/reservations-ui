@@ -14,21 +14,28 @@
     border-radius: .5rem;
 }
 
-.add-reservation-btn:hover {
-    color: green;
+.react-calendar__tile:hover .add-reservation-btn {
+    color: var(--neutral-color);
 }
 
 .add-reservation-btn > span {
     padding: .25rem;
     font-family: 'Ubuntu Mono', monospace;
+    font-size: .8rem;
+}
+
+.add-reservation-btn:hover {
+    color: #598221 !important;
 }
 
 #calendar-wrapper {
     width: 100%;
-    height: calc(100vh - 17rem);
+    height: calc(100vh - 21rem);
+    padding: 2rem 0;
+    top: 15rem;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: stretch;
     overflow: scroll;
 }
 
@@ -55,22 +62,25 @@
 .react-calendar__navigation > button {
     color: white;
     background-color: var(--background-color);
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 1rem;
+    font-weight: bold;
 }
 
 .react-calendar__month-view__days__day {
     color: white;
 }
 
-.react-calendar__month-view__days__day:hover {
-    color: var(--neutral-color)
-}
-
 .react-calendar__month-view__days__day--neighboringMonth {
     color: var(--background-color);
+    font-size: 1rem;
 }
 
 .react-calendar__tile > abbr {
+    font-size: 1rem;
+    font-weight: bold;
     padding-bottom: 1rem;
+    font-family: 'Ubuntu Mono', monospace;
 }
 
 .react-calendar__tile {
@@ -79,7 +89,8 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    overflow: visible !important;
+    border: solid 1px var(--background-color) !important;
+    border-collapse: collapse;
 }
 
 .react-calendar__tile--now {
@@ -87,6 +98,13 @@
 }
 
 .react-calendar__tile--active {
-    background-color: var(--accent-color);
+    background-color: var(--neutral-color);
+    color: white;
+}
+
+.react-calendar__tile--active:hover,
+.react-calendar__month-view__days__day:hover,
+.react-calendar__tile--now:hover {
+    background-color: whitesmoke !important;
     color: var(--neutral-color);
 }

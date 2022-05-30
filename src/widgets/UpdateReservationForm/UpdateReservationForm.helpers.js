@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import axios from "axios";
-import {properties} from "../properties";
+import {properties} from "../../properties";
 
 const validationSchema = Yup.object().shape({
     username: Yup.string().required('Username is required'),

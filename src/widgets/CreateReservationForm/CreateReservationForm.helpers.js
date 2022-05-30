@@ -1,7 +1,7 @@
 import * as Yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
 import axios from "axios";
-import {properties} from "../properties";
+import {properties} from "../../properties";
 import {format} from "date-fns";
 
 const validationSchema = Yup.object().shape({

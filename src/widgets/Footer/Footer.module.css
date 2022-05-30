@@ -7,6 +7,8 @@
     font-family: 'Ubuntu Mono', monospace;
     background-color: var(--background-color);
     color: var(--accent-color);
+    position: sticky;
+    bottom: 0;
 }
 
 #footer > p {

@@ -24,3 +24,12 @@
     align-items: center;
     justify-content: center;
 }
+
+.delete-btn {
+    width: 50%;
+    position: absolute;
+    bottom: 1rem;
+    color: var(--error-color);
+    transform: translateX(45%);
+    cursor: pointer;
+}

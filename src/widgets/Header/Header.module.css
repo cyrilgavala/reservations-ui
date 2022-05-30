@@ -1,6 +1,6 @@
 #header {
     background-color: var(--neutral-color);
-    background-image: url("./header-image.jpg");
+    background-image: url("/public/images/header-image.jpg");
     background-blend-mode: overlay;
     background-position: center;
     background-size: cover;

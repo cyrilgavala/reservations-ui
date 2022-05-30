@@ -1,0 +1,70 @@
+#menu-wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+#menu-toggle {
+    position: fixed;
+    top: 4rem;
+    left: 4rem;
+    width: 2rem;
+    height: 2rem;
+    background-color: var(--neutral-color);
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: all 500ms linear;
+}
+
+#menu-toggle::before {
+    content: "";
+    height: 2px;
+    width: 50%;
+    background-color: white;
+    position: absolute;
+    top: .75rem;
+    left: .5rem;
+    transition: transform 500ms linear;
+}
+
+#menu-toggle::after {
+    content: "";
+    height: 2px;
+    width: 50%;
+    background-color: white;
+    position: absolute;
+    top: 1.25rem;
+    left: .5rem;
+    transition: transform 500ms linear;
+}
+
+#menu-toggle.open::before {
+    transform: rotate(45deg) translate(.2rem, .15rem);
+}
+
+#menu-toggle.open::after {
+    transform: rotate(-45deg) translate(.2rem, -.15rem) ;
+}
+
+#menu-items {
+    position: absolute;
+    top: 6rem;
+    left: 4rem;
+    display: flex;
+    flex-direction: column;
+    border-radius: .5rem;
+    overflow: hidden;
+    transform: scaleY(0);
+    transition: transform 500ms ease-in-out;
+    transform-origin: top;
+}
+
+.open ~ #menu-items {
+    transform: scaleY(1);
+}
+
+#menu-items > a {
+    background-color: var(--neutral-color);
+    color: white;
+    padding: .75rem 1.5rem;
+    text-decoration: none;
+}

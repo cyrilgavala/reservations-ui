@@ -1,15 +1,17 @@
 import 'react-calendar/dist/Calendar.css';
 import './App.css';
-import Header from "./Header";
-import Footer from "./Footer";
-import CalendarWrapper from "./CalendarWrapper";
+import {BrowserRouter, Route, Routes} from "react-router-dom";
+import AllReservations from "./routes/AllReservations";
+import MyReservations from "./routes/MyReservations";
+import React from "react";
 
 const App = () => {
-    return <div className="App">
-        <Header />
-        <CalendarWrapper />
-        <Footer />
-    </div>
+    return <BrowserRouter>
+        <Routes>
+            <Route path="/" element={<AllReservations/>}/>
+            <Route path="/my-reservations" element={<MyReservations/>}/>
+        </Routes>
+    </BrowserRouter>
 }
 
 export default App;
