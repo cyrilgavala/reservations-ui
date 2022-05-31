@@ -34,7 +34,7 @@
     position: absolute;
     top: 1.25rem;
     left: .5rem;
-    transition: transform 500ms linear;
+    transition: transform 250ms linear;
 }
 
 #menu-toggle.open::before {
@@ -54,7 +54,7 @@
     border-radius: .5rem;
     overflow: hidden;
     transform: scaleY(0);
-    transition: transform 500ms ease-in-out;
+    transition: transform 250ms ease-in-out;
     transform-origin: top;
 }
 

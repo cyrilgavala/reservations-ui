@@ -33,9 +33,7 @@
     height: calc(100vh - 21rem);
     padding: 2rem 0;
     top: 15rem;
-    display: flex;
-    justify-content: center;
-    align-items: stretch;
+    display: grid;
     overflow: scroll;
 }
 
@@ -48,6 +46,7 @@
     height: max-content;
     background-color: var(--neutral-color);
     border-color: var(--background-color);
+    margin: auto;
 }
 
 .react-calendar__navigation {
@@ -97,7 +96,7 @@
     background-color: var(--error-color);
 }
 
-.react-calendar__tile--active {
+.react-calendar__tile--active:not(.react-calendar__tile--now) {
     background-color: var(--neutral-color);
     color: white;
 }

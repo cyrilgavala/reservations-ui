@@ -37,9 +37,9 @@ export const UpdateReservationForm = ({reservation, updateCallback, enabled}) =>
                        disabled={isSubmitting || !enabled} {...register("endDate")}/>
                 <div className="validation">{errors.endDate?.message}</div>
             </div>
-            <button className="submit-btn" disabled={isSubmitting || !enabled} type="submit">
+            {enabled && <button className="submit-btn" disabled={isSubmitting || !enabled} type="submit">
                 <span>{isSubmitting ? "Loading..." : "Update reservation"}</span>
-            </button>
+            </button>}
             {apiError && <p className="error-message">{apiError}</p>}
         </form>
     )

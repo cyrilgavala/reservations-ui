@@ -33,3 +33,7 @@
     transform: translateX(45%);
     cursor: pointer;
 }
+
+.delete-btn:hover {
+    text-shadow: 0 0 .15rem var(--error-color);
+}

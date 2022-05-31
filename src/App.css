@@ -99,8 +99,7 @@ body {
 }
 
 .submit-btn:hover {
-    border: solid 1px var(--accent-color);
-    box-shadow: 0 0 .25rem var(--accent-color), inset 0 0 .25rem var(--accent-color);
+    text-shadow: 0 0 .25rem var(--accent-color);
 }
 
 .submit-btn:disabled {
@@ -154,13 +153,22 @@ body {
     font-family: 'Ubuntu Mono', monospace;
 }
 
+.close-btn i {
+    transition: transform 250ms ease-in-out;
+}
+
+.close-btn:hover i {
+    transform: scale(1.25);
+    text-shadow: 0 0 .25rem var(--error-color);
+}
+
 .my-reservations-wrapper {
     display: flex;
     flex-wrap: wrap;
     overflow: scroll;
     gap: 2rem;
-    height: 100%;
-    width: 100%;
+    height: calc(100vh - 21rem);
     justify-content: center;
-    padding: 7.5rem 0;
+    align-items: center;
+    padding: 2rem;
 }
