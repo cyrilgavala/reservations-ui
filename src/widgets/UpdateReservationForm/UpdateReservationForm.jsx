@@ -4,7 +4,7 @@ import {useState} from "react";
 import {format, parseISO} from "date-fns";
 import {properties} from "../../properties";
 
-export const UpdateReservationForm = ({reservation, updateCallback, enabled}) => {
+export const UpdateReservationForm = ({reservation, updateCallback}) => {
 
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm(formOptions(reservation))
     const [apiError, setApiError] = useState("")
@@ -28,18 +28,18 @@ export const UpdateReservationForm = ({reservation, updateCallback, enabled}) =>
             <div className={"input-wrapper"}>
                 <label className="input-label" htmlFor="update-start-date">Start time: </label>
                 <input id="update-start-date" className="form-input" type="datetime-local" required step="60"
-                       disabled={isSubmitting || !enabled} {...register("startDate")}/>
+                       disabled={isSubmitting} {...register("startDate")}/>
                 <div className="validation">{errors.startDate?.message}</div>
             </div>
             <div className={"input-wrapper"}>
                 <label className="input-label" htmlFor="update-end-date">End time: </label>
                 <input id="update-end-date" className="form-input" type="datetime-local" step="60" required
-                       disabled={isSubmitting || !enabled} {...register("endDate")}/>
+                       disabled={isSubmitting} {...register("endDate")}/>
                 <div className="validation">{errors.endDate?.message}</div>
             </div>
-            {enabled && <button className="submit-btn" disabled={isSubmitting || !enabled} type="submit">
+            <button className="submit-btn" disabled={isSubmitting} type="submit">
                 <span>{isSubmitting ? "Loading..." : "Update reservation"}</span>
-            </button>}
+            </button>
             {apiError && <p className="error-message">{apiError}</p>}
         </form>
     )

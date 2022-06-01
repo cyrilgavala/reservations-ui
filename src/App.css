@@ -119,15 +119,12 @@ body {
 
 .MuiBackdrop-root {
     backdrop-filter: blur(.25rem);
-    outline: none;
 }
 
 .modal-content {
-    padding: 3rem 2rem 2rem;
+    padding: 5px;
     display: flex;
     gap: 1rem;
-    justify-self: center;
-    align-self: center;
     flex-wrap: wrap;
     max-height: 80%;
     max-width: 80%;
@@ -135,9 +132,10 @@ body {
     width: fit-content;
     background-color: var(--neutral-color);
     border-radius: 1rem;
-    margin: 30vh auto;
-    position: relative;
     overflow: scroll;
+    border: none;
+    outline: none;
+    margin: 10% auto;
 }
 
 .close-btn {

@@ -17,6 +17,10 @@
     position: relative;
 }
 
+.reservation-detail-wrapper > p {
+    font-size: 1rem;
+}
+
 .delete-reservation {
     color: var(--error-color);
     cursor: pointer;
