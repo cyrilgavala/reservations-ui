@@ -67,4 +67,9 @@
     color: white;
     padding: .75rem 1.5rem;
     text-decoration: none;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+#menu-items > a:hover {
+    color: var(--accent-color);
 }

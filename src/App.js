@@ -1,17 +1,22 @@
 import 'react-calendar/dist/Calendar.css';
 import './App.css';
 import {BrowserRouter, Route, Routes} from "react-router-dom";
-import AllReservations from "./routes/AllReservations";
+import Calendar from "./routes/Calendar";
 import MyReservations from "./routes/MyReservations";
 import React from "react";
+import LoginPage from "./routes/LoginPage";
+import {UserProvider} from "./UserDetails";
 
 const App = () => {
-    return <BrowserRouter>
-        <Routes>
-            <Route path="/" element={<AllReservations/>}/>
-            <Route path="/my-reservations" element={<MyReservations/>}/>
-        </Routes>
-    </BrowserRouter>
+    return <UserProvider>
+        <BrowserRouter>
+            <Routes>
+                <Route path="/" element={<LoginPage/>}/>
+                <Route path="/calendar" element={<Calendar/>}/>
+                <Route path="/my-reservations" element={<MyReservations/>}/>
+            </Routes>
+        </BrowserRouter>
+    </UserProvider>
 }
 
 export default App;

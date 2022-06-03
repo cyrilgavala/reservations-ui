@@ -9,6 +9,7 @@
 @import "widgets/CalendarWrapper/CalendarWrapper.module.css";
 @import "widgets/MenuWrapper/MenuWrapper.module.css";
 @import "widgets/Spinner/Spinner.module.css";
+@import "widgets/ContentWrapper/ContentWrapper.module.css";
 
 * {
     margin: 0;
@@ -29,12 +30,13 @@ body {
 }
 
 .App {
-    background-color: var(--neutral-color);
+    background-color: transparent;
     height: 100%;
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: stretch;
+    justify-items: center;
+    align-content: center;
 }
 
 .form-wrapper {
@@ -68,16 +70,31 @@ body {
 .form-input {
     font-size: 1rem;
     padding: .75rem .5rem;
-    background-color: var(--neutral-color);
+    background-color: transparent;
     color: var(--accent-color);
-    border-radius: .5rem;
-    outline: var(--accent-color);
+    outline: none;
     font-family: 'Ubuntu Mono', monospace;
+    cursor: pointer;
+    transition: border-bottom-width 250ms ease-in-out;
+    transform-origin: left;
+}
+
+.form-input:disabled {
+    cursor: not-allowed;
+    opacity: .9;
+}
+
+.form-input:disabled::-webkit-datetime-edit-day-field,
+.form-input:disabled::-webkit-datetime-edit-text,
+.form-input:disabled::-webkit-datetime-edit-month-field,
+.form-input:disabled::-webkit-datetime-edit-year-field,
+.form-input:disabled::-webkit-datetime-edit-hour-field,
+.form-input:disabled::-webkit-datetime-edit-minute-field {
+    color: var(--accent-color) !important;
 }
 
 .form-input:focus {
-    border: solid 1px var(--accent-color);
-    box-shadow: 0 0 .25rem var(--accent-color), inset 0 0 .25rem var(--accent-color);
+    border-bottom: solid 2px var(--accent-color);
 }
 
 .validation {
@@ -103,7 +120,12 @@ body {
 }
 
 .submit-btn:disabled {
-    pointer-events: none;
+    color: var(--background-color);
+}
+
+.submit-btn:disabled:hover {
+    cursor: not-allowed;
+    text-shadow: none;
 }
 
 .error-message {
@@ -122,20 +144,19 @@ body {
 }
 
 .modal-content {
-    padding: 5px;
+    padding: 2rem;
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
     max-height: 80%;
     max-width: 80%;
-    height: fit-content;
-    width: fit-content;
-    background-color: var(--neutral-color);
     border-radius: 1rem;
     overflow: scroll;
     border: none;
     outline: none;
-    margin: 10% auto;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
 }
 
 .close-btn {
@@ -158,15 +179,4 @@ body {
 .close-btn:hover i {
     transform: scale(1.25);
     text-shadow: 0 0 .25rem var(--error-color);
-}
-
-.my-reservations-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    overflow: scroll;
-    gap: 2rem;
-    height: calc(100vh - 21rem);
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
 }

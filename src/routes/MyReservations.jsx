@@ -1,44 +1,51 @@
-import {useEffect, useState} from "react";
-import axios from "axios";
-import {properties} from "../properties";
-import {deleteReservation} from "../widgets/CalendarWrapper/CalendarWrapper.helpers";
+import {useContext, useEffect, useState} from "react";
 import MenuWrapper from "../widgets/MenuWrapper";
 import ReservationDetail from "../widgets/ReservationDetail";
 import Spinner from "../widgets/Spinner";
 import Header from "../widgets/Header";
+import {isBefore, parseISO} from "date-fns";
+import {UserContext} from "../UserDetails";
+import {deleteReservation, loadReservationForUser} from "../service/reservationService";
+import ContentWrapper from "../widgets/ContentWrapper";
 import Footer from "../widgets/Footer";
 
 const MyReservations = () => {
 
-    const loggedInUser = "cecilek"
-
+    const {user} = useContext(UserContext)
     const [data, setData] = useState([])
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        axios.get(properties.apiUrl + "/" + loggedInUser)
-            .then(res => setData(res.data))
-            .catch(err => console.error(err.response.data))
-    }, [loggedInUser])
+        if (user.name.length > 0) {
+            setLoading(true)
+            loadReservationForUser(user)
+                .then(res => setData(res.data))
+                .catch(err => console.error(err.response.data))
+                .finally(() => setLoading(false))
+        }
+    }, [user])
 
     const deleteCallback = uuid => {
         deleteReservation(uuid)
-            .then(() => {
-                const filterReservations = data.filter(item => item.uuid !== uuid)
-                setData(filterReservations)
-            })
+            .then(() => setData(data.filter(item => item.uuid !== uuid)))
             .catch(err => console.error(err.response.data))
     }
 
-    const details = data.map(item => <ReservationDetail key={item.uuid} reservation={item} enabled={true}
+    const enable = date => isBefore(new Date(), parseISO(date))
+    const details = data.map(item => <ReservationDetail key={item.uuid}
+                                                        reservation={item}
+                                                        enabled={enable(item.reservationFrom)}
                                                         deleteCallback={deleteCallback}/>)
 
-    return <>
-        <MenuWrapper />
-        <Header />
-        {data.length === 0 && <Spinner />}
-        {data.length > 0 && <div className="my-reservations-wrapper">{details}</div>}
-        <Footer />
-    </>
+    return <div className="App">
+        <MenuWrapper/>
+        <Header/>
+        {loading && <Spinner/>}
+        {user.name.length === 0 && <ContentWrapper content={<p>User is not logged in</p>}/>}
+        {user.name.length > 0 && data.length === 0 && !loading && <ContentWrapper content={<p>No reservations. Go to calendar to create one.</p>}/>}
+        {user.name.length > 0 && data.length > 0 && <ContentWrapper content={details}/>}
+        <Footer/>
+    </div>
 }
 
 export default MyReservations;

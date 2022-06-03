@@ -30,11 +30,8 @@
 
 #calendar-wrapper {
     width: 100%;
-    height: calc(100vh - 21rem);
-    padding: 2rem 0;
-    top: 15rem;
+    height: 100%;
     display: grid;
-    overflow: scroll;
 }
 
 .calendar-item {

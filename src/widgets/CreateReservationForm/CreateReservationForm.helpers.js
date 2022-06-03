@@ -1,8 +1,5 @@
 import * as Yup from "yup";
 import {yupResolver} from "@hookform/resolvers/yup";
-import axios from "axios";
-import {properties} from "../../properties";
-import {format} from "date-fns";
 
 const validationSchema = Yup.object().shape({
     username: Yup.string()
@@ -13,15 +10,11 @@ const validationSchema = Yup.object().shape({
         .required('End date is required')
 });
 
-const formOptions = {resolver: yupResolver(validationSchema)};
+const formOptions = user => {
+    return {
+        resolver: yupResolver(validationSchema),
+        defaultValues: {username: user.roles.filter(role => role === "ADMIN").length > 0 ? "" : user.name},
+    }
+};
 
-const createReservation = (date, data) => {
-    return axios.post(properties.apiUrl, {
-        reservationFor: data.username,
-        reservationFrom: date + " " + data.startDate + ":00",
-        reservationTo: date + " " + data.endDate + ":00",
-        createdAt: format(new Date(), properties.dateTimeFormat)
-    })
-}
-
-export {formOptions, createReservation}
+export {formOptions}

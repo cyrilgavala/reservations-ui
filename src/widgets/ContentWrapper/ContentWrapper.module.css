@@ -1,0 +1,16 @@
+.content-wrapper {
+    height: calc(100vh - 21rem);
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    overflow: scroll;
+    background-color: var(--neutral-color);
+}
+
+.content-wrapper p {
+    font-family: 'Ubuntu Mono', monospace;
+    font-size: 2rem;
+}

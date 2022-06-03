@@ -1,10 +1,11 @@
 import {useForm} from "react-hook-form";
-import {updateReservation, formOptions} from "./UpdateReservationForm.helpers";
+import {formOptions} from "./UpdateReservationForm.helpers";
 import {useState} from "react";
 import {format, parseISO} from "date-fns";
 import {properties} from "../../properties";
+import {updateReservation} from "../../service/reservationService";
 
-export const UpdateReservationForm = ({reservation, updateCallback}) => {
+export const UpdateReservationForm = ({reservation, updateCallback, enabled}) => {
 
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm(formOptions(reservation))
     const [apiError, setApiError] = useState("")
@@ -28,16 +29,16 @@ export const UpdateReservationForm = ({reservation, updateCallback}) => {
             <div className={"input-wrapper"}>
                 <label className="input-label" htmlFor="update-start-date">Start time: </label>
                 <input id="update-start-date" className="form-input" type="datetime-local" required step="60"
-                       disabled={isSubmitting} {...register("startDate")}/>
+                       disabled={isSubmitting || !enabled} {...register("startDate")}/>
                 <div className="validation">{errors.startDate?.message}</div>
             </div>
             <div className={"input-wrapper"}>
                 <label className="input-label" htmlFor="update-end-date">End time: </label>
                 <input id="update-end-date" className="form-input" type="datetime-local" step="60" required
-                       disabled={isSubmitting} {...register("endDate")}/>
+                       disabled={isSubmitting || !enabled} {...register("endDate")}/>
                 <div className="validation">{errors.endDate?.message}</div>
             </div>
-            <button className="submit-btn" disabled={isSubmitting} type="submit">
+            <button className="submit-btn" disabled={isSubmitting || !enabled} type="submit">
                 <span>{isSubmitting ? "Loading..." : "Update reservation"}</span>
             </button>
             {apiError && <p className="error-message">{apiError}</p>}

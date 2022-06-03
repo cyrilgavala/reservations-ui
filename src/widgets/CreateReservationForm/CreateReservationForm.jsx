@@ -1,10 +1,13 @@
 import {useForm} from "react-hook-form";
-import {createReservation, formOptions} from "./CreateReservationForm.helpers";
-import {useState} from "react";
+import {formOptions} from "./CreateReservationForm.helpers";
+import {useContext, useState} from "react";
+import {createReservation} from "../../service/reservationService"
+import {UserContext} from "../../UserDetails";
 
 export const CreateReservationForm = ({callback, date}) => {
 
-    const {register, handleSubmit, reset, formState: {errors, isSubmitting}} = useForm(formOptions)
+    const {user} = useContext(UserContext)
+    const {register, handleSubmit, reset, formState: {errors, isSubmitting}} = useForm(formOptions(user))
     const [apiError, setApiError] = useState("")
 
     const onSubmit = data => {
@@ -20,8 +23,8 @@ export const CreateReservationForm = ({callback, date}) => {
         <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
             <div className="input-wrapper">
                 <label className="input-label" htmlFor="create-username">Patient name: </label>
-                <input id="create-username" className="form-input" type="text" required autoFocus
-                       disabled={isSubmitting} {...register("username")}/>
+                <input id="create-username" className="form-input" type="text" required
+                       disabled={isSubmitting || user.roles.includes("USER")} {...register("username")}/>
                 <div className={"validation"}>{errors.username?.message}</div>
             </div>
             <div className={"input-wrapper"}>
@@ -31,7 +34,7 @@ export const CreateReservationForm = ({callback, date}) => {
             </div>
             <div className={"input-wrapper"}>
                 <label className="input-label" htmlFor="create-start-date">Start time: </label>
-                <input id="create-start-date" className="form-input" type="time" required step="60"
+                <input id="create-start-date" className="form-input" type="time" required step="60" autoFocus
                        disabled={isSubmitting} {...register("startDate")}/>
                 <div className="validation">{errors.startDate?.message}</div>
             </div>
