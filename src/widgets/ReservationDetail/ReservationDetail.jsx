@@ -14,8 +14,7 @@ export const ReservationDetail = ({reservation, deleteCallback, enabled}) => {
 
     return <div className={"reservation-detail-wrapper"}>
         <UpdateReservationForm reservation={data} updateCallback={updateCallback} enabled={enabled}/>
-        {enabled && <span className="delete-btn" onClick={handleDelete}>Delete reservation&#160;
-            <i className="fa-regular fa-circle-xmark"/>
+        {enabled && <span className="delete-btn" onClick={handleDelete}><i className="fa-regular fa-circle-xmark"/> Delete reservation
         </span>}
     </div>
 }

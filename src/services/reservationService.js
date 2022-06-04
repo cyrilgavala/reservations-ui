@@ -41,4 +41,4 @@ const deleteReservation = uuid => {
     return axios.delete(properties.apiUrl + `/${uuid}`)
 }
 
-export {getAllReservations, getReservationForUser, loadReservationForUser, createReservation, updateReservation, deleteReservation}
+export {loadReservationForUser, createReservation, updateReservation, deleteReservation}

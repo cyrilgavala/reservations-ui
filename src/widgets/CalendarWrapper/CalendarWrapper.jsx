@@ -5,23 +5,20 @@ import Modal from "@mui/material/Modal";
 import CreateReservationForm from "../CreateReservationForm";
 import Calendar from "react-calendar";
 import Spinner from "../Spinner";
-import {getAllReservations, getReservationForUser, deleteReservation} from "../../service/reservationService"
+import {loadReservationForUser, deleteReservation} from "../../services/reservationService"
 
 export const CalendarWrapper = ({user}) => {
     const [reservations, setReservations] = useState([])
     const [open, setOpen] = useState(false)
     const [pressedDate, setPressedDate] = useState("")
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (user.roles !== undefined && user.roles.includes("ADMIN")) {
-            getAllReservations()
-                .then(res => setReservations(res.data))
-                .catch(err => console.error(err.response.data))
-        } else {
-            getReservationForUser(user.name)
-                .then(res => setReservations(res.data))
-                .catch(err => console.error(err.response.data))
-        }
+        setLoading(true)
+        user.name?.length > 0 && loadReservationForUser(user)
+            .then(res => setReservations(res.data))
+            .catch(err => console.error(err.response.data))
+            .finally(() => setLoading(false))
     }, [user])
 
     const deleteCallback = uuid => {
@@ -62,9 +59,9 @@ export const CalendarWrapper = ({user}) => {
     const toggleModal = () => setOpen(!open)
 
     return <>
-        {reservations.length === 0 && <Spinner/>}
         {user.name.length === 0 && <p>User is not logged in</p>}
-        {user.name.length > 0 && reservations.length > 0 && <div id="calendar-wrapper">
+        {user.name.length > 0 && loading && <Spinner/>}
+        {user.name.length > 0 && !loading && <div id="calendar-wrapper">
             <Modal open={open} onClose={() => toggleModal()}>
                 <div className="modal-content">
                     <span className="close-btn" onClick={toggleModal}>Close&#160;<i

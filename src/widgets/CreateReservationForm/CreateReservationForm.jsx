@@ -1,7 +1,7 @@
 import {useForm} from "react-hook-form";
 import {formOptions} from "./CreateReservationForm.helpers";
 import {useContext, useState} from "react";
-import {createReservation} from "../../service/reservationService"
+import {createReservation} from "../../services/reservationService"
 import {UserContext} from "../../UserDetails";
 
 export const CreateReservationForm = ({callback, date}) => {
@@ -45,7 +45,7 @@ export const CreateReservationForm = ({callback, date}) => {
                 <div className="validation">{errors.endDate?.message}</div>
             </div>
             <button className="submit-btn" disabled={isSubmitting} type="submit">
-                <span>{isSubmitting ? "Loading..." : "Create reservation"}</span>
+                <span><i className="fa-solid fa-circle-plus"/>{isSubmitting ? " Loading..." : " Create reservation"}</span>
             </button>
             {apiError && <p className="error-message">{apiError}</p>}
         </form>

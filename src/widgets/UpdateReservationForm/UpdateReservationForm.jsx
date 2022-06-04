@@ -3,7 +3,7 @@ import {formOptions} from "./UpdateReservationForm.helpers";
 import {useState} from "react";
 import {format, parseISO} from "date-fns";
 import {properties} from "../../properties";
-import {updateReservation} from "../../service/reservationService";
+import {updateReservation} from "../../services/reservationService";
 
 export const UpdateReservationForm = ({reservation, updateCallback, enabled}) => {
 
@@ -39,7 +39,7 @@ export const UpdateReservationForm = ({reservation, updateCallback, enabled}) =>
                 <div className="validation">{errors.endDate?.message}</div>
             </div>
             <button className="submit-btn" disabled={isSubmitting || !enabled} type="submit">
-                <span>{isSubmitting ? "Loading..." : "Update reservation"}</span>
+                <span><i className="fa-solid fa-pen"/>{isSubmitting ? " Loading..." : " Update reservation"}</span>
             </button>
             {apiError && <p className="error-message">{apiError}</p>}
         </form>

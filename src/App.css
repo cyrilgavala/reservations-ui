@@ -42,13 +42,24 @@ body {
 .form-wrapper {
     display: flex;
     flex-direction: column;
-    gap: 1rem;
+    gap: 2rem;
     width: fit-content;
     padding: 2rem;
     background-color: var(--background-color);
     border-radius: 1rem;
     align-items: center;
     font-family: 'Ubuntu Mono', monospace;
+}
+
+.form-wrapper > p {
+    font-size: 1rem;
+    cursor: default;
+}
+
+.form-wrapper > p > a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
 }
 
 .input-wrapper {
@@ -71,12 +82,13 @@ body {
     font-size: 1rem;
     padding: .75rem .5rem;
     background-color: transparent;
-    color: var(--accent-color);
+    color: white;
     outline: none;
     font-family: 'Ubuntu Mono', monospace;
     cursor: pointer;
     transition: border-bottom-width 250ms ease-in-out;
     transform-origin: left;
+    min-width: 250px;
 }
 
 .form-input:disabled {
@@ -99,24 +111,26 @@ body {
 
 .validation {
     color: var(--error-color);
+    cursor: default;
 }
 
 .submit-btn {
     background-color: var(--neutral-color);
-    color: var(--accent-color);
-    padding: .5rem 1.25rem;
+    color: white;
+    padding: 1rem 1.5rem;
     width: fit-content;
     justify-self: center;
     border-radius: .5rem;
     font-size: 1rem;
     cursor: pointer;
     margin-top: 1rem;
-    transition: font-size 250ms;
     font-family: 'Ubuntu Mono', monospace;
+    transition: all 250ms;
 }
 
 .submit-btn:hover {
     text-shadow: 0 0 .25rem var(--accent-color);
+    color: var(--accent-color);
 }
 
 .submit-btn:disabled {

@@ -5,7 +5,7 @@ import Spinner from "../widgets/Spinner";
 import Header from "../widgets/Header";
 import {isBefore, parseISO} from "date-fns";
 import {UserContext} from "../UserDetails";
-import {deleteReservation, loadReservationForUser} from "../service/reservationService";
+import {deleteReservation, loadReservationForUser} from "../services/reservationService";
 import ContentWrapper from "../widgets/ContentWrapper";
 import Footer from "../widgets/Footer";
 

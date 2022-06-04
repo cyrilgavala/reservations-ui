@@ -1,9 +1,9 @@
 import {useContext, useEffect, useState} from "react";
 import {useForm} from "react-hook-form";
 import {formOptions} from "./LoginForm.helpers";
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {UserContext} from "../../UserDetails";
-import {logIn} from "../../service/userService";
+import {loginUser} from "../../services/userService";
 
 const LoginForm = () => {
 
@@ -18,10 +18,14 @@ const LoginForm = () => {
 
     const onSubmit = data => {
         setApiError("")
-        const loggedInUser = logIn(data)
+        const loggedInUser = loginUser(data)
         setUser(loggedInUser)
         reset()
-        navigate("/my-reservations")
+        if (loggedInUser.roles.includes("ADMIN")) {
+            navigate("/calendar")
+        } else if (loggedInUser.roles.includes("USER")) {
+            navigate("/my-reservations")
+        }
     }
 
     return <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
@@ -35,11 +39,13 @@ const LoginForm = () => {
             <label className="input-label" htmlFor="login-password">Password: </label>
             <input id="login-password" className="form-input" type="password" required
                    disabled={isSubmitting} {...register("password")}/>
+            <div className={"validation"}>{errors.password?.message}</div>
         </div>
         <button className="submit-btn" disabled={isSubmitting} type="submit">
-            <span>{isSubmitting ? "Loading..." : "Log in"}</span>
+            <span><i className="fa-solid fa-right-to-bracket"/>{isSubmitting ? " Loading..." : " Log in"}</span>
         </button>
         {apiError && <p className="error-message">{apiError}</p>}
+        <p>Not a user? Register <Link to="/register">here</Link></p>
     </form>
 }
 
