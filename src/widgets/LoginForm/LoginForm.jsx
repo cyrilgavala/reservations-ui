@@ -5,13 +5,16 @@ import {Link, useNavigate} from "react-router-dom";
 import {UserContext} from "../../UserDetails";
 import {loginUser} from "../../services/userService";
 import jwt_decode from "jwt-decode";
+import Spinner from "../Spinner";
 
 const LoginForm = () => {
 
     const navigate = useNavigate()
     const {setUser} = useContext(UserContext)
-    const {register, handleSubmit, reset, formState: {errors, isSubmitting}} = useForm(formOptions)
+    const {register, handleSubmit, reset, formState: {errors}} = useForm(formOptions)
+
     const [apiError, setApiError] = useState("")
+    const [loading, setLoading] = useState(false)
 
     useEffect(() => {
         setUser({sub: "", rol: "", accessToken: ""})
@@ -19,6 +22,7 @@ const LoginForm = () => {
 
     const onSubmit = data => {
         setApiError("")
+        setLoading(true)
         loginUser(data)
             .then(res => {
                 const decoded = jwt_decode(res.data.accessToken)
@@ -34,23 +38,24 @@ const LoginForm = () => {
                 console.error(err)
                 setApiError(err.response.data)
             })
+            .finally(() => setLoading(false))
     }
 
     return <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className="input-wrapper">
             <label className="input-label" htmlFor="login-username">Username: </label>
             <input id="login-username" className="form-input" type="text" required autoFocus
-                   disabled={isSubmitting} {...register("username")}/>
+                   disabled={loading} {...register("username")}/>
             <div className={"validation"}>{errors.username?.message}</div>
         </div>
         <div className={"input-wrapper"}>
             <label className="input-label" htmlFor="login-password">Password: </label>
             <input id="login-password" className="form-input" type="password" required
-                   disabled={isSubmitting} {...register("password")}/>
+                   disabled={loading} {...register("password")}/>
             <div className={"validation"}>{errors.password?.message}</div>
         </div>
-        <button className="submit-btn" disabled={isSubmitting} type="submit">
-            <span><i className="fa-solid fa-right-to-bracket"/>{isSubmitting ? " Loading..." : " Log in"}</span>
+        <button className="submit-btn" disabled={loading} type="submit">
+            {loading ? <Spinner/> : <span><i className="fa-solid fa-right-to-bracket"/> Log in</span>}
         </button>
         {apiError && <p className="error-message">{apiError}</p>}
         <p>Not a user? Register <Link to="/register">here</Link></p>

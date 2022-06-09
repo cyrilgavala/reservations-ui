@@ -40,7 +40,7 @@ const MyReservations = () => {
     return <div className="App">
         <MenuWrapper/>
         <Header/>
-        {loading && <Spinner/>}
+        {loading && <ContentWrapper content={<Spinner/>}/>}
         {user.sub.length === 0 && <ContentWrapper content={<p>User is not logged in</p>}/>}
         {user.sub.length > 0 && data.length === 0 && !loading && <ContentWrapper content={<p>No reservations. Go to calendar to create one.</p>}/>}
         {user.sub.length > 0 && data.length > 0 && <ContentWrapper content={details}/>}
