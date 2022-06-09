@@ -12,7 +12,7 @@ export const CreateReservationForm = ({callback, date}) => {
 
     const onSubmit = data => {
         setApiError("")
-        createReservation(date, data)
+        createReservation(date, data, user.accessToken)
             .then(res => callback(res.data))
             .catch(err => setApiError(err.response.data))
             .catch(err => console.error(err))
@@ -24,7 +24,7 @@ export const CreateReservationForm = ({callback, date}) => {
             <div className="input-wrapper">
                 <label className="input-label" htmlFor="create-username">Patient name: </label>
                 <input id="create-username" className="form-input" type="text" required
-                       disabled={isSubmitting || user.roles.includes("USER")} {...register("username")}/>
+                       disabled={isSubmitting || "USER" === user.rol} {...register("username")}/>
                 <div className={"validation"}>{errors.username?.message}</div>
             </div>
             <div className={"input-wrapper"}>

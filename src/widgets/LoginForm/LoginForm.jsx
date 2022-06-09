@@ -4,6 +4,7 @@ import {formOptions} from "./LoginForm.helpers";
 import {Link, useNavigate} from "react-router-dom";
 import {UserContext} from "../../UserDetails";
 import {loginUser} from "../../services/userService";
+import jwt_decode from "jwt-decode";
 
 const LoginForm = () => {
 
@@ -13,19 +14,26 @@ const LoginForm = () => {
     const [apiError, setApiError] = useState("")
 
     useEffect(() => {
-        setUser({name: "", roles: []})
+        setUser({sub: "", rol: "", accessToken: ""})
     }, [setUser])
 
     const onSubmit = data => {
         setApiError("")
-        const loggedInUser = loginUser(data)
-        setUser(loggedInUser)
-        reset()
-        if (loggedInUser.roles.includes("ADMIN")) {
-            navigate("/calendar")
-        } else if (loggedInUser.roles.includes("USER")) {
-            navigate("/my-reservations")
-        }
+        loginUser(data)
+            .then(res => {
+                const decoded = jwt_decode(res.data.accessToken)
+                setUser({sub: decoded.sub, rol: decoded.rol, accessToken: res.data.accessToken})
+                reset()
+                if ("ADMIN" === decoded.rol) {
+                    navigate("/calendar")
+                } else if ("USER" === decoded.rol) {
+                    navigate("/my-reservations")
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                setApiError(err.response.data)
+            })
     }
 
     return <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>

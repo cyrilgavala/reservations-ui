@@ -15,14 +15,14 @@ export const CalendarWrapper = ({user}) => {
 
     useEffect(() => {
         setLoading(true)
-        user.name?.length > 0 && loadReservationForUser(user)
+        user.sub?.length > 0 && loadReservationForUser(user)
             .then(res => setReservations(res.data))
             .catch(err => console.error(err.response.data))
             .finally(() => setLoading(false))
     }, [user])
 
     const deleteCallback = uuid => {
-        deleteReservation(uuid)
+        deleteReservation(uuid, user.accessToken)
             .then(() => {
                 const filterReservations = reservations.filter(item => item.uuid !== uuid)
                 setReservations(filterReservations)
@@ -59,9 +59,9 @@ export const CalendarWrapper = ({user}) => {
     const toggleModal = () => setOpen(!open)
 
     return <>
-        {user.name.length === 0 && <p>User is not logged in</p>}
-        {user.name.length > 0 && loading && <Spinner/>}
-        {user.name.length > 0 && !loading && <div id="calendar-wrapper">
+        {user.sub.length === 0 && <p>User is not logged in</p>}
+        {user.sub.length > 0 && loading && <Spinner/>}
+        {user.sub.length > 0 && !loading && <div id="calendar-wrapper">
             <Modal open={open} onClose={() => toggleModal()}>
                 <div className="modal-content">
                     <span className="close-btn" onClick={toggleModal}>Close&#160;<i

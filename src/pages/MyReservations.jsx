@@ -16,7 +16,7 @@ const MyReservations = () => {
     const [loading, setLoading] = useState(false)
 
     useEffect(() => {
-        if (user.name.length > 0) {
+        if (user.sub.length > 0) {
             setLoading(true)
             loadReservationForUser(user)
                 .then(res => setData(res.data))
@@ -26,7 +26,7 @@ const MyReservations = () => {
     }, [user])
 
     const deleteCallback = uuid => {
-        deleteReservation(uuid)
+        deleteReservation(uuid, user.accessToken)
             .then(() => setData(data.filter(item => item.uuid !== uuid)))
             .catch(err => console.error(err.response.data))
     }
@@ -41,9 +41,9 @@ const MyReservations = () => {
         <MenuWrapper/>
         <Header/>
         {loading && <Spinner/>}
-        {user.name.length === 0 && <ContentWrapper content={<p>User is not logged in</p>}/>}
-        {user.name.length > 0 && data.length === 0 && !loading && <ContentWrapper content={<p>No reservations. Go to calendar to create one.</p>}/>}
-        {user.name.length > 0 && data.length > 0 && <ContentWrapper content={details}/>}
+        {user.sub.length === 0 && <ContentWrapper content={<p>User is not logged in</p>}/>}
+        {user.sub.length > 0 && data.length === 0 && !loading && <ContentWrapper content={<p>No reservations. Go to calendar to create one.</p>}/>}
+        {user.sub.length > 0 && data.length > 0 && <ContentWrapper content={details}/>}
         <Footer/>
     </div>
 }

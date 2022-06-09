@@ -1,18 +1,25 @@
-import bcrypt from "react-native-bcrypt";
+import axios from "axios";
+import {properties} from "../properties";
+
+const apiUrl = properties.apiUrl + "/user/"
 
 const encryptPassword = password => {
-    return bcrypt.hashSync(password)
+    return btoa(password)
 }
 
 const loginUser = data => {
-    console.log(encryptPassword(data.password))
-    return {name: data.username, roles: ["USER"]}
+    return axios.post(apiUrl + "login", {
+        username: data.username,
+        password: encryptPassword(data.password),
+    })
 }
 
 const registerUser = data => {
-    let counter = 0
-    console.log(encryptPassword(data.password))
-    return {name: data.username + counter++, roles: ["USER"]}
+    return axios.post(apiUrl + "register", {
+        username: data.username,
+        email: data.email,
+        password: encryptPassword(data.password),
+    })
 }
 
 export {loginUser, registerUser}

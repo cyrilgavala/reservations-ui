@@ -1,12 +1,14 @@
 import {useForm} from "react-hook-form";
 import {formOptions} from "./UpdateReservationForm.helpers";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {format, parseISO} from "date-fns";
 import {properties} from "../../properties";
 import {updateReservation} from "../../services/reservationService";
+import {UserContext} from "../../UserDetails";
 
 export const UpdateReservationForm = ({reservation, updateCallback, enabled}) => {
 
+    const {user} = useContext(UserContext)
     const {register, handleSubmit, formState: {errors, isSubmitting}} = useForm(formOptions(reservation))
     const [apiError, setApiError] = useState("")
 
@@ -14,7 +16,7 @@ export const UpdateReservationForm = ({reservation, updateCallback, enabled}) =>
         setApiError("")
         reservation.reservationFrom = format(parseISO(data.startDate), properties.dateTimeFormat)
         reservation.reservationTo = format(parseISO(data.endDate), properties.dateTimeFormat)
-        updateReservation(reservation)
+        updateReservation(reservation, user.accessToken)
             .then(res => updateCallback(res.data))
             .catch(err => setApiError(err.response.data))
     }

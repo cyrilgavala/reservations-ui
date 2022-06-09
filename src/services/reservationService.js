@@ -2,43 +2,50 @@ import axios from "axios";
 import {properties} from "../properties";
 import {format} from "date-fns";
 
+const apiUrl = properties.apiUrl + "/reservation/"
 
-const getAllReservations = () => {
-    return axios.get(properties.apiUrl)
-}
-
-const getReservationForUser = username => {
-    return axios.get(properties.apiUrl + "/" + username)
-}
-
-const loadReservationForUser = user => {
-    if (user.roles !== undefined && user.roles.includes("ADMIN")) {
-        return getAllReservations()
-    } else {
-        return getReservationForUser(user.name)
+const config = accessToken => {
+    return {
+        headers: {"Authorization": "Bearer " + accessToken},
     }
 }
 
-const createReservation = (date, data) => {
-    return axios.post(properties.apiUrl, {
+const getAllReservations = user => {
+    return axios.get(apiUrl, config(user.accessToken))
+}
+
+const getReservationForUser = user => {
+    return axios.get(apiUrl + user.sub, config(user.accessToken))
+}
+
+const loadReservationForUser = user => {
+    if (user.rol !== undefined && "ADMIN" === user.rol) {
+        return getAllReservations(user)
+    } else {
+        return getReservationForUser(user)
+    }
+}
+
+const createReservation = (date, data, accessToken) => {
+    return axios.post(apiUrl, {
         reservationFor: data.username,
         reservationFrom: date + " " + data.startDate + ":00",
         reservationTo: date + " " + data.endDate + ":00",
         createdAt: format(new Date(), properties.dateTimeFormat)
-    })
+    }, config(accessToken))
 }
 
-const updateReservation = (data) => {
-    return axios.put(properties.apiUrl, {
+const updateReservation = (data, accessToken) => {
+    return axios.put(apiUrl, {
         uuid: data.uuid,
         reservationFor: data.reservationFor,
         reservationFrom: data.reservationFrom,
         reservationTo: data.reservationTo,
-    })
+    }, config(accessToken))
 }
 
-const deleteReservation = uuid => {
-    return axios.delete(properties.apiUrl + `/${uuid}`)
+const deleteReservation = (uuid, accessToken) => {
+    return axios.delete(apiUrl + uuid, config(accessToken))
 }
 
 export {loadReservationForUser, createReservation, updateReservation, deleteReservation}

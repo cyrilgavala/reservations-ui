@@ -1,21 +1,35 @@
 import {Link, useNavigate} from "react-router-dom";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {useForm} from "react-hook-form";
 import {formOptions} from "./RegisterForm.helpers";
 import {registerUser} from "../../services/userService";
+import jwt_decode from "jwt-decode";
+import {UserContext} from "../../UserDetails";
 
 export const RegisterForm = () => {
 
     const navigate = useNavigate()
+    const {setUser} = useContext(UserContext)
     const {register, handleSubmit, reset, formState: {errors, isSubmitting}} = useForm(formOptions)
     const [apiError, setApiError] = useState("")
 
     const onSubmit = data => {
         setApiError("")
-        const registeredUser = registerUser(data)
-        console.log(registeredUser)
-        reset()
-        navigate("/")
+        registerUser(data)
+            .then(res => {
+                const decoded = jwt_decode(res.data.accessToken)
+                setUser({sub: decoded.sub, rol: decoded.rol, accessToken: res.data.accessToken})
+                reset()
+                if ("ADMIN" === decoded.rol) {
+                    navigate("/calendar")
+                } else if ("USER" === decoded.rol) {
+                    navigate("/my-reservations")
+                }
+            })
+            .catch(err => {
+                console.error(err)
+                setApiError(err.response.data)
+            })
     }
 
     return <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>

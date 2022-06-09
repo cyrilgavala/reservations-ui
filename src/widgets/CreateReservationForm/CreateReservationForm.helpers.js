@@ -13,7 +13,7 @@ const validationSchema = Yup.object().shape({
 const formOptions = user => {
     return {
         resolver: yupResolver(validationSchema),
-        defaultValues: {username: user.roles.filter(role => role === "ADMIN").length > 0 ? "" : user.name},
+        defaultValues: {username: "ADMIN" === user.rol ? "" : user.sub},
     }
 };
 

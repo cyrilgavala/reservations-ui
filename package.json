@@ -1,6 +1,6 @@
 {
   "name": "reservations-ui",
-  "version": "1.2.0",
+  "version": "2.0.0",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.7.1",
@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "date-fns": "^2.28.0",
+    "jwt-decode": "^3.1.2",
     "react": "^18.1.0",
     "react-calendar": "^3.7.0",
     "react-dom": "^18.1.0",
