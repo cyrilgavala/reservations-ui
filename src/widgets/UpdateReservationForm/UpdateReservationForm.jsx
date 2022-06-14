@@ -27,7 +27,7 @@ export const UpdateReservationForm = ({reservation, updateCallback, enabled}) =>
     }
 
     return (
-        <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form id="update-form" className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
             <div className="input-wrapper">
                 <label className="input-label" htmlFor="update-username">Patient name: </label>
                 <input id="update-username" className="form-input" type="text" disabled {...register("username")}/>
@@ -45,9 +45,9 @@ export const UpdateReservationForm = ({reservation, updateCallback, enabled}) =>
                        disabled={loading || !enabled} {...register("endDate")}/>
                 <div className="validation">{errors.endDate?.message}</div>
             </div>
-            <button className="submit-btn" disabled={loading || !enabled} type="submit">
+            {enabled && <button className="submit-btn" disabled={loading} type="submit">
                 {loading ? <Spinner/> : <span><i className="fa-solid fa-pen"/> Update reservation</span>}
-            </button>
+            </button>}
             {apiError && <p className="error-message">{apiError}</p>}
         </form>
     )

@@ -6,7 +6,7 @@
     font-size: .75rem;
     height: max-content;
     width: max-content;
-    padding: 2rem;
+    padding: .5rem;
     border-radius: 1rem;
 }
 
@@ -14,7 +14,7 @@
     width: max-content;
     color: var(--error-color);
     cursor: pointer;
-    margin: 1rem auto 0;
+    margin: 0 auto;
     font-family: 'Ubuntu Mono', monospace;
 }
 

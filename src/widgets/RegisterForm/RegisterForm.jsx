@@ -37,7 +37,7 @@ export const RegisterForm = () => {
             .finally(() => setLoading(false))
     }
 
-    return <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
+    return <form id="register-form" className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className="input-wrapper">
             <label className="input-label" htmlFor="register-username">Username: </label>
             <input id="register-username" className="form-input" type="text" required autoFocus

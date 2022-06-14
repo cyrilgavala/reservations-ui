@@ -41,7 +41,7 @@ const LoginForm = () => {
             .finally(() => setLoading(false))
     }
 
-    return <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
+    return <form id="login-form" className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
         <div className="input-wrapper">
             <label className="input-label" htmlFor="login-username">Username: </label>
             <input id="login-username" className="form-input" type="text" required autoFocus

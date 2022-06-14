@@ -26,7 +26,7 @@ export const CreateReservationForm = ({callback, date}) => {
     }
 
     return (
-        <form className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
+        <form id="create-form" className="form-wrapper" noValidate onSubmit={handleSubmit(onSubmit)}>
             <div className="input-wrapper">
                 <label className="input-label" htmlFor="create-username">Patient name: </label>
                 <input id="create-username" className="form-input" type="text" required
