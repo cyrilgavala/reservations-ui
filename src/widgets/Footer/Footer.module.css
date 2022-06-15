@@ -7,7 +7,7 @@
     font-family: 'Ubuntu Mono', monospace;
     background-color: var(--background-color);
     color: var(--accent-color);
-    position: sticky;
+    position: fixed;
     bottom: 0;
 }
 

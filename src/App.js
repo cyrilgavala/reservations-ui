@@ -7,6 +7,7 @@ import React from "react";
 import LoginPage from "./pages/LoginPage";
 import {UserProvider} from "./UserDetails";
 import RegisterPage from "./pages/RegisterPage";
+import Footer from "./widgets/Footer";
 
 const App = () => {
     return <UserProvider>
@@ -18,6 +19,7 @@ const App = () => {
                 <Route path="/my-reservations" element={<MyReservations/>}/>
             </Routes>
         </BrowserRouter>
+        <Footer/>
     </UserProvider>
 }
 

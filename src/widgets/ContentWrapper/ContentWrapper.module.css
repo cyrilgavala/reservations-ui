@@ -1,12 +1,13 @@
 .content-wrapper {
-    height: calc(100vh - 21rem);
     padding: 2rem;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     overflow: scroll;
-    background-color: var(--neutral-color);
+    height: fit-content;
+    width: 80%;
+    margin-bottom: 2rem;
 }
 
 .content-wrapper p {

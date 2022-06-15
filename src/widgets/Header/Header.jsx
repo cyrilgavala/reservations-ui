@@ -1,1 +1,0 @@
-export const Header = () => <header id="header"/>

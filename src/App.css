@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Ubuntu+Mono&display=swap');
 @import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css');
-@import "widgets/Header/Header.module.css";
 @import "widgets/Footer/Footer.module.css";
 @import "widgets/ReservationDetail/ReservationDetail.module.css";
 @import "widgets/ReservationsWrapper/ReservationsWrapper.module.css";
@@ -24,28 +23,32 @@ body {
     height: 100vh;
     width: 100vw;
     background-color: var(--background-color);
+    background-image: url("/public/images/header-image.jpg");
+    background-blend-mode: overlay;
+    background-position: top;
+    background-size: cover;
     color: var(--accent-color);
 }
 
 .App {
     background-color: transparent;
-    height: 100%;
-    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-items: center;
-    align-content: center;
+    width: 100vw;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
 }
 
 .form-wrapper {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    width: auto;
-    background-color: var(--background-color);
     border-radius: 1rem;
     align-items: center;
     font-family: 'Ubuntu Mono', monospace;
+    backdrop-filter: blur(1rem);
+    box-shadow: 0 0 .5rem var(--background-color);
 }
 
 .form-wrapper > p {
@@ -64,6 +67,7 @@ body {
     display: grid;
     grid-template-columns: 140px 200px;
     width: min-content;
+    align-items: center;
 }
 
 .input-wrapper:hover > .input-label {
@@ -79,15 +83,16 @@ body {
 
 .form-input {
     font-size: 1rem;
-    background-color: transparent;
+    background-color: #1c1e2450;
     color: white;
     outline: none;
     font-family: 'Ubuntu Mono', monospace;
     cursor: pointer;
-    transition: border-bottom-width 250ms ease-in-out;
+    transition: all 250ms ease-in-out;
     transform-origin: left;
-    padding-inline: .5rem;
-
+    padding: .5rem;
+    border-radius: .25rem;
+    margin-left: .25rem;
 }
 
 .form-input:disabled {
@@ -105,7 +110,7 @@ body {
 }
 
 .form-input:focus {
-    border-bottom: solid 2px var(--accent-color);
+    box-shadow: 0 0 .25rem var(--accent-color);
 }
 
 .validation {
