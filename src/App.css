@@ -18,8 +18,8 @@
 body {
     --background-color: #1c1e24;
     --neutral-color: #282c34;
-    --accent-color: #4daec8;
-    --error-color: #fb8261;
+    --accent-color: #61dbfb;
+    --error-color: #fb8161;
     height: 100vh;
     width: 100vw;
     background-color: var(--background-color);
@@ -47,8 +47,8 @@ body {
     border-radius: 1rem;
     align-items: center;
     font-family: 'Ubuntu Mono', monospace;
-    backdrop-filter: blur(1rem);
-    box-shadow: 0 0 .5rem var(--background-color);
+    backdrop-filter: blur(1.5rem);
+    background-color: #1c1e2450;
 }
 
 .form-wrapper > p {
@@ -121,7 +121,8 @@ body {
 }
 
 .submit-btn {
-    background-color: var(--neutral-color);
+    background: transparent;
+    border: 2px solid white;
     color: white;
     padding: 1rem 1.5rem;
     width: fit-content;
@@ -137,6 +138,7 @@ body {
 .submit-btn:hover {
     text-shadow: 0 0 .25rem var(--accent-color);
     color: var(--accent-color);
+    border-color: var(--accent-color);
 }
 
 .submit-btn:disabled {
