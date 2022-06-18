@@ -14,7 +14,7 @@ export const ReservationsTable = ({reservations, deleteCallback, isAdmin}) => {
     const enabled = date => isBefore(new Date(), parseISO(date))
 
     useEffect(() => {
-        const filteredByName = reservations.filter(item => item.reservationFor.toLowerCase().includes(filterName))
+        const filteredByName = reservations.filter(item => item.reservationFor.toLowerCase().includes(filterName.toLowerCase()))
         if (filterDate > 0) {
             setFiltered(filteredByName.filter(item => enabled(item.reservationFrom)))
         } else if (filterDate < 0) {
