@@ -1,32 +1,33 @@
 import {isBefore, parseISO} from "date-fns";
 import Modal from "@mui/material/Modal";
 import UpdateReservationForm from "../UpdateReservationForm";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 
-export const ReservationsTable = ({reservations, deleteCallback}) => {
+export const ReservationsTable = ({reservations, deleteCallback, isAdmin}) => {
 
     const [open, setOpen] = useState(false)
+    const [filterDate, setFilterDate] = useState(0)
+    const [filterName, setFilterName] = useState("")
     const [filtered, setFiltered] = useState(reservations)
     const [itemToUpdate, setItemToUpdate] = useState({})
 
-    const toggleModal = () => setOpen(!open)
-
     const enabled = date => isBefore(new Date(), parseISO(date))
 
-    const filter = value => {
-        if (value > 0) {
-            setFiltered(reservations.filter(item => enabled(item.reservationFrom)))
-        } else if (value < 0) {
-            setFiltered(reservations.filter(item => !enabled(item.reservationFrom)))
+    useEffect(() => {
+        const filteredByName = reservations.filter(item => item.reservationFor.toLowerCase().includes(filterName))
+        if (filterDate > 0) {
+            setFiltered(filteredByName.filter(item => enabled(item.reservationFrom)))
+        } else if (filterDate < 0) {
+            setFiltered(filteredByName.filter(item => !enabled(item.reservationFrom)))
         } else {
-            setFiltered(reservations)
+            setFiltered(filteredByName)
         }
-    }
+    }, [reservations, filterDate, filterName])
 
     const modifyButtons = item => <span>
         <i className="fa-solid fa-pen update-icon" title="Update reservation" onClick={() => {
             setItemToUpdate(item)
-            toggleModal()
+            setOpen(!open)
         }}/>
             <i className="fa-regular fa-circle-xmark delete-icon" title="Delete reservation"
                onClick={() => deleteCallback(item.uuid)}/>
@@ -40,28 +41,36 @@ export const ReservationsTable = ({reservations, deleteCallback}) => {
     </tr>)
 
     return <div className="reservations-table-wrapper">
-        <Modal open={open} onClose={() => toggleModal()}>
+        <Modal open={open} onClose={() => setOpen(!open)}>
             <div className="modal-content">
-            <span className="close-btn" onClick={toggleModal}>Close&#160;<i
+            <span className="close-btn" onClick={() => setOpen(!open)}>Close&#160;<i
                 className="fa-regular fa-circle-xmark"/></span>
                 <UpdateReservationForm reservation={itemToUpdate} enabled={enabled(itemToUpdate.reservationFrom)}
-                                       updateCallback={toggleModal}/>
+                                       updateCallback={() => setOpen(!open)}/>
             </div>
         </Modal>
-        <div className="reservations-table-filters-wrapper">
+        <div className="reservations-table-date-filters-wrapper">
             <div>
-                <input type="radio" id="all" name="filter" value={0} onClick={() => filter(0)}/>
+                <input type="radio" id="all" name="filter" value={0} checked={0 === filterDate}
+                       onClick={() => setFilterDate(0)}/>
                 <label htmlFor="all">All reservations</label>
             </div>
             <div>
-                <input type="radio" id="future" name="filter" value={1} onClick={() => filter(1)}/>
+                <input type="radio" id="future" name="filter" value={1} checked={1 === filterDate}
+                       onClick={() => setFilterDate(1)}/>
                 <label htmlFor="future">Future reservations</label>
             </div>
             <div>
-                <input type="radio" id="past" name="filter" value={-1} onClick={() => filter(-1)}/>
+                <input type="radio" id="past" name="filter" value={-1} checked={-1 === filterDate}
+                       onClick={() => setFilterDate(-1)}/>
                 <label htmlFor="past">Past reservations</label>
             </div>
         </div>
+        {isAdmin && <div className="reservations-table-name-filter-wrapper">
+            <label className="input-label" htmlFor="past">Name: </label>
+            <input className="form-input" type="text" id="name" name="filter"
+                   onChange={event => setFilterName(event.target.value)}/>
+        </div>}
         <table className="reservations-table">
             <tbody>
             <tr className="reservations-table-head-row">
@@ -70,7 +79,9 @@ export const ReservationsTable = ({reservations, deleteCallback}) => {
                 <td className="reservations-table-cell">To</td>
                 <td className="reservations-table-cell"/>
             </tr>
-            {rows}
+            {filtered.length > 0 ? rows : <tr className="reservations-table-row">
+                <td className="reservations-table-cell">No reservations to display.</td>
+            </tr>}
             </tbody>
         </table>
     </div>

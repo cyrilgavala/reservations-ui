@@ -24,11 +24,7 @@ export const RegisterForm = () => {
                 const decoded = jwt_decode(res.data.accessToken)
                 setUser({sub: decoded.sub, rol: decoded.rol, accessToken: res.data.accessToken})
                 reset()
-                if ("ADMIN" === decoded.rol) {
-                    navigate("/calendar")
-                } else if ("USER" === decoded.rol) {
-                    navigate("/my-reservations")
-                }
+                navigate("/reservations")
             })
             .catch(err => {
                 console.error(err)

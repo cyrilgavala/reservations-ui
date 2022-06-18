@@ -32,8 +32,9 @@ const MyReservations = () => {
         <MenuWrapper/>
         {loading && <ContentWrapper content={<Spinner/>}/>}
         {user.sub.length === 0 && <ContentWrapper content={<p>User is not logged in</p>}/>}
-        {user.sub.length > 0 && data.length === 0 && !loading && <ContentWrapper content={<p>No reservations. Go to calendar to create one.</p>}/>}
-        {user.sub.length > 0 && data.length > 0 && <ContentWrapper content={<ReservationsTable reservations={data} deleteCallback={deleteCallback}/>}/>}
+        {user.sub.length > 0 && data.length > 0 &&
+            <ContentWrapper content={<ReservationsTable reservations={data} deleteCallback={deleteCallback}
+                                                        isAdmin={"ADMIN" === user.rol}/>}/>}
     </div>
 }
 

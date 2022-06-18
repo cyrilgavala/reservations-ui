@@ -80,6 +80,7 @@ body {
     align-items: center;
     font-size: 1rem;
     text-align: right;
+    font-family: 'Ubuntu Mono', monospace;
 }
 
 .form-input {
