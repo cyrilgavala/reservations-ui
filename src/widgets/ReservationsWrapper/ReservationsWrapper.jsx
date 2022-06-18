@@ -8,6 +8,7 @@ export const ReservationsWrapper = ({reservations, deleteCallback}) => {
     const [open, setOpen] = useState(false);
 
     const enable = date => isBefore(new Date(), parseISO(date))
+
     const details = reservations.map(item => <ReservationDetail key={item.uuid} reservation={item} enabled={enable(item.reservationFrom)}
                                                                 deleteCallback={deleteCallback}/>)
 

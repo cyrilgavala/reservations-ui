@@ -3,6 +3,7 @@
 @import "widgets/Footer/Footer.module.css";
 @import "widgets/ReservationDetail/ReservationDetail.module.css";
 @import "widgets/ReservationsWrapper/ReservationsWrapper.module.css";
+@import "widgets/ReservationsTable/ReservationsTable.module.css";
 @import "widgets/CalendarWrapper/CalendarWrapper.module.css";
 @import "widgets/MenuWrapper/MenuWrapper.module.css";
 @import "widgets/Spinner/Spinner.module.css";
@@ -122,8 +123,8 @@ body {
 
 .submit-btn {
     background: transparent;
-    border: 2px solid white;
-    color: white;
+    border: 2px solid var(--accent-color);
+    color: var(--accent-color);
     padding: 1rem 1.5rem;
     width: fit-content;
     justify-self: center;
@@ -136,9 +137,8 @@ body {
 }
 
 .submit-btn:hover {
-    text-shadow: 0 0 .25rem var(--accent-color);
-    color: var(--accent-color);
-    border-color: var(--accent-color);
+    color: white;
+    border-color: white;
 }
 
 .submit-btn:disabled {

@@ -1,0 +1,62 @@
+.reservations-table-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.reservations-table-filters-wrapper {
+    display: flex;
+    justify-content: space-evenly;
+    padding-block: 1rem;
+}
+
+.reservations-table-filters-wrapper > div > label {
+    padding-left: .5rem;
+    font-family: 'Ubuntu Mono', monospace;
+}
+
+.reservations-table-filters-wrapper > div > input {
+    accent-color: var(--accent-color);
+}
+
+.reservations-table {
+    font-family: 'Ubuntu Mono', monospace;
+    background: #282c3425;
+    backdrop-filter: blur(1rem);
+    padding: 2rem;
+    border-radius: 1rem;
+}
+
+.reservations-table-row:nth-child(even) {
+    background-color: #282c3450;
+}
+
+.reservations-table-row:nth-child(odd) {
+    background-color: #282c3475;
+}
+
+.reservations-table-head-row {
+    font-weight: bold;
+}
+
+.reservations-table-row {
+    color: white;
+}
+
+.reservations-table-cell {
+    padding: .5rem 1rem;
+    cursor: default;
+}
+
+.reservations-table-cell > span > i {
+    cursor: pointer;
+    padding-inline: .5rem;
+}
+
+.update-icon:hover {
+    color: var(--accent-color);
+}
+
+.delete-icon:hover {
+    color: var(--error-color);
+}
