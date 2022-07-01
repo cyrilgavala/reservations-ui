@@ -1,22 +1,22 @@
 {
   "name": "reservations-ui",
-  "version": "2.2.2",
+  "version": "2.2.3",
   "private": true,
   "dependencies": {
-    "@emotion/react": "^11.7.1",
-    "@emotion/styled": "^11.6.0",
-    "@hookform/resolvers": "^2.8.10",
-    "@mui/material": "^5.8.1",
+    "@emotion/react": "^11.9.3",
+    "@emotion/styled": "^11.9.3",
+    "@hookform/resolvers": "^2.9.3",
+    "@mui/material": "^5.8.6",
     "@testing-library/jest-dom": "^5.16.4",
     "@testing-library/react": "^13.3.0",
-    "@testing-library/user-event": "^13.5.0",
+    "@testing-library/user-event": "^14.2.1",
     "axios": "^0.27.2",
     "date-fns": "^2.28.0",
     "jwt-decode": "^3.1.2",
-    "react": "^18.1.0",
+    "react": "^18.2.0",
     "react-calendar": "^3.7.0",
-    "react-dom": "^18.1.0",
-    "react-hook-form": "^7.31.3",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.33.1",
     "react-native-bcrypt": "^2.4.0",
     "react-router-dom": "^6.3.0",
     "react-scripts": "5.0.1",
@@ -45,5 +45,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.18.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.6.0",
+    "eslint-plugin-react": "^7.30.1",
+    "eslint-plugin-react-hooks": "^4.6.0"
   }
 }
