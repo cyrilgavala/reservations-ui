@@ -62,6 +62,6 @@ export const RegisterForm = () => {
             {loading ? <Spinner/> : <span><i className="fa-solid fa-right-to-bracket"/> Register</span>}
         </button>
         {apiError && <p className="error-message">{apiError}</p>}
-        <p>Already a user? Log in <Link to="/">here</Link></p>
+        {!loading && <p>Already a user? Log in <Link to="/">here</Link></p>}
     </form>
 }

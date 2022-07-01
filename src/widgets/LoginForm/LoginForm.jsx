@@ -54,7 +54,7 @@ const LoginForm = () => {
             {loading ? <Spinner/> : <span><i className="fa-solid fa-right-to-bracket"/> Log in</span>}
         </button>
         {apiError && <p className="error-message">{apiError}</p>}
-        <p>Not a user? Register <Link to="/register">here</Link></p>
+        {!loading && <p>Not a user? Register <Link to="/register">here</Link></p>}
     </form>
 }
 

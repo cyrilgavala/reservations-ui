@@ -1,6 +1,16 @@
 .reservations-table-wrapper {
     display: block;
     height: 80vh;
+    padding: 1rem;
+    backdrop-filter: blur(1rem);
+    background-color: var(--black-50);
+    border-radius: 1rem;
+}
+
+.reservations-table-wrapper > p {
+    padding: 2rem;
+    font-size: .75rem;
+    text-align: center;
 }
 
 .reservations-table-date-filters-wrapper {
@@ -10,7 +20,7 @@
 }
 
 .reservations-table-date-filters-wrapper > div > label {
-    padding-left: .5rem;
+    padding-inline: .5rem;
     font-family: 'Ubuntu Mono', monospace;
 }
 
@@ -28,31 +38,42 @@
 
 .reservations-table {
     font-family: 'Ubuntu Mono', monospace;
-    background: #282c3425;
-    backdrop-filter: blur(1rem);
-    padding: 2rem;
-    border-radius: 1rem;
+    padding: 1.5rem;
+    border-radius: .5rem;
+    border-collapse: collapse;
+    overflow: hidden;
 }
 
 .reservations-table > tbody {
-    max-height: 60vh;
+    max-height: 67vh;
     overflow-y: auto;
     overflow-x: hidden;
     display: block;
 }
 
+.reservations-table > thead {
+    display: block;
+    text-align: left;
+}
+
+.reservations-table td,th {
+    min-width: 200px;
+}
+
+.reservations-table td:last-child,th:last-child {
+    min-width: 75px;
+}
+
 .reservations-table-row:nth-child(even) {
-    background-color: #282c3450;
+    background-color: var(--black-25);
 }
 
 .reservations-table-row:nth-child(odd) {
-    background-color: #282c3475;
+    background-color: var(--black-50);
 }
 
 .reservations-table-head-row {
     font-weight: bold;
-    position: sticky;
-    top: 0;
     background-color: var(--background-color);
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
@@ -63,7 +84,7 @@
 }
 
 .reservations-table-cell {
-    padding: .5rem 1rem;
+    padding: .75rem 1rem;
     cursor: default;
     vertical-align: middle;
 }

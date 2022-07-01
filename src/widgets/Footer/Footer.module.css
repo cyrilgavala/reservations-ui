@@ -5,7 +5,8 @@
     justify-content: space-between;
     align-items: center;
     font-family: 'Ubuntu Mono', monospace;
-    background-color: var(--background-color);
+    background-color: var(--black-50);
+    backdrop-filter: blur(1rem);
     color: var(--accent-color);
     position: fixed;
     bottom: 0;

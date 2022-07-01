@@ -21,6 +21,8 @@ body {
     --neutral-color: #282c34;
     --accent-color: #61dbfb;
     --error-color: #fb8161;
+    --black-50: #00000050;
+    --black-25: #00000025;
     height: 100vh;
     width: 100vw;
     background-color: var(--background-color);
@@ -49,7 +51,7 @@ body {
     align-items: center;
     font-family: 'Ubuntu Mono', monospace;
     backdrop-filter: blur(1.5rem);
-    background-color: #1c1e2450;
+    background-color: var(--black-50);
 }
 
 .form-wrapper > p {
@@ -85,7 +87,7 @@ body {
 
 .form-input {
     font-size: 1rem;
-    background-color: #1c1e2450;
+    background-color: var(--black-50);
     color: white;
     outline: none;
     font-family: 'Ubuntu Mono', monospace;
@@ -144,6 +146,7 @@ body {
 
 .submit-btn:disabled {
     color: var(--background-color);
+    pointer-events: none;
 }
 
 .submit-btn:disabled:hover {

@@ -71,18 +71,19 @@ export const ReservationsTable = ({reservations, deleteCallback, isAdmin}) => {
             <input className="form-input" type="text" id="name" name="filter"
                    onChange={event => setFilterName(event.target.value)}/>
         </div>}
-        <table className="reservations-table">
-            <tbody>
+        {filtered.length === 0 && <p>No reservations to display.</p>}
+        {filtered.length > 0 && <table className="reservations-table">
+            <thead>
             <tr className="reservations-table-head-row">
-                <td className="reservations-table-cell">Patient name</td>
-                <td className="reservations-table-cell">From</td>
-                <td className="reservations-table-cell">To</td>
-                <td className="reservations-table-cell"/>
+                <th className="reservations-table-cell">Patient name</th>
+                <th className="reservations-table-cell">From</th>
+                <th className="reservations-table-cell">To</th>
+                <th className="reservations-table-cell"/>
             </tr>
-            {filtered.length > 0 ? rows : <tr className="reservations-table-row">
-                <td className="reservations-table-cell">No reservations to display.</td>
-            </tr>}
+            </thead>
+            <tbody>
+                {rows}
             </tbody>
-        </table>
+        </table>}
     </div>
 }
